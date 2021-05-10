@@ -5,13 +5,13 @@ import math
 
 MAPQUEST_ENDPOINT = "http://open.mapquestapi.com/geocoding/v1/address"  # For geocoding
 MAPBOX_ENDPOINT = "https://api.mapbox.com/v4/mapbox.satellite"
-MAPBOX_ZOOM = 19
+MAPBOX_ZOOM = 18
 IMAGES_DIR = "images/"
 
 MAPQUEST_API_KEY = os.getenv("MAPQUEST_KEY")
 MAPBOX_API_KEY = os.getenv("MAPBOX_KEY")
 
-# Use MapQuest to convert an address to a lat, long tuple
+# Use MapQuest to convert an address to a lat,long tuple
 def address_to_lat_long(address):
     try:
         params = {'key': MAPQUEST_API_KEY, 'location': address}
