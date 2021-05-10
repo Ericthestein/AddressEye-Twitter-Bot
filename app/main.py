@@ -64,9 +64,12 @@ def twitter_challenge_response_check(crc_token):
 def direct_address_request(address_request: AddressRequest):
     print("Received direct address request")
     address = address_request.address
-    image_path = address_to_birds_eye(address)
-    response = FileResponse(image_path)
-    return response
+    try:
+        image_path = address_to_birds_eye(address)
+        response = FileResponse(image_path)
+        return response
+    except Exception as e:
+        return str(e)
 
 # Process incoming Twitter data
 @app.post("/webhook")

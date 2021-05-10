@@ -56,12 +56,14 @@ def lat_long_to_satellite_image(lat, long):
 
 
 def address_to_birds_eye(address):
+    if address is None or len(address) < 1:
+        raise Exception("No address provided")
     lat, long = address_to_lat_long(address)
     if lat is None or long is None:
         print("Error: could not get latlong")
-        return None
+        raise Exception("Failed to get latitude and longitude of the provided address")
     image_path = lat_long_to_satellite_image(lat, long)
     if image_path is None:
         print("Error: could not get image")
-        return None
+        raise Exception("Got latitude and longitude, but failed to get image of the provided address")
     return image_path

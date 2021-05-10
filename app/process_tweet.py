@@ -26,12 +26,14 @@ def process_tweet(bot, tweet):
         print("Replying with satellite image")
         address = message
         # get satellite image
-        image_path = address_to_birds_eye(address)
-        if image_path is None:
+        try:
+            image_path = address_to_birds_eye(address)
+            print("Sending image " + image_path)
+            # reply with image
+            status = "@" + tweet.user.screen_name + " Here is a bird's-eye view of " + address
+            update_status = bot.update_with_media(image_path, status=status, in_reply_to_status_id=tweet.id)
+        except Exception as e:
             print("Error: Could not get image_path")
-            return
-        print("Sending image " + image_path)
-        # reply with image
-        status = "@" + tweet.user.screen_name + " Here is a bird's-eye view of " + address
-        update_status = bot.update_with_media(image_path, status=status, in_reply_to_status_id=tweet.id)
-        print(update_status.text)
+            # Attempt to send error message as tweet
+            status = "@" + tweet.user.screen_name + " " + str(e)
+            bot.update_status(status=status, in_reply_to_status_id=tweet.id)
