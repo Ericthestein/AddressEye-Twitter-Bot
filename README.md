@@ -46,6 +46,14 @@ The `RUN_MODE`s available are:
 
 Depending on the `RUN_MODE` you choose, you may not need all of the keys specified.
 
+## Challenges
+
+The most challenging aspect of developing AddressEye was subscribing to Twitter's Account Activity API webhook for instantaneous mention alerts and replies. Although the bot was functional when run from the `INTERVAL` mode, a maximum delay of 60 seconds between being mentioned and replying was possible. To avoid this, the API running the bot would have to be alerted immediately after the bot was mentioned. However, setting up such alerts was not entirely straightforward at first. The following realizations helped me along the way:
+1) an [Account Activity API Dev Environment](https://developer.twitter.com/en/account/environments) is necessary to use this feature. When setting it up, take note of the Dev environment label you provide. This corresponds with the `TWITTER_ENV_NAME` environment variable in the `docker run` command above.
+2) after giving your Twitter bot Read, Write, and Direct Messages permissions, you must regenerate your authentication tokens for the change to take effect
+3) a CRC GET endpoint must be set up for Twitter to authorize access to the Account Activity API for your bot. For an example of this with FastAPI, see [the twitter_challenge_response_check function of this file](app/main.py).
+4) after setting up the CRC GET endpoint and the POST endpoint that consumes Twitter's alerts [(on_twitter_event in this case)](app/main.py), which should have the same path (/webhook in this case), you must send a POST request to Twitter to initiate the CRC check and subsequent alerts. In this repository, the REGISTER `RUN_MODE` handles this process in [entry.py](app/entry.py).
+
 ## Built With
 
 AddressEye was developed using:
