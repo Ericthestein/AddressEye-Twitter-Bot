@@ -34,9 +34,15 @@ ericthestein/address_eye
 ```
 
 The `RUN_MODE`s available are:
-1) API: Runs AddressEye as a REST API. This contains numerous methods, including one that directly returns a satellite image from an address passed in through JSON, one that processes mentions sent via Twitter's Account Activity API webhook, and one that properly replies to Twitter's Challenge Response Check (CRC). @AddressEye's API is running on LightSail at https://address-eye.0mg5o04lbriga.us-east-1.cs.amazonlightsail.com/
-2) REGISTER: Registers for and subscribes to Twitter's Account Activity API webhook.
-3) INTERVAL: At a set interval, collects and processes all mentions of @AddressEye.
+1) API: Runs AddressEye as a REST API. This contains numerous methods, including one that directly returns a satellite image from an address passed in through JSON, one that processes mentions sent via Twitter's Account Activity API webhook, and one that properly replies to Twitter's Challenge Response Check (CRC). @AddressEye's API is running on LightSail at https://address-eye.0mg5o04lbriga.us-east-1.cs.amazonlightsail.com/. If you choose this `RUN_MODE`, you can test the /address GET endpoint using Postman by sending the following raw body as JSON to `localhost:8080/address/`:
+```
+{
+    "address": "YOUR ADDRESS HERE"
+}
+```
+
+3) REGISTER: Registers for and subscribes to Twitter's Account Activity API webhook.
+4) INTERVAL: At a set interval, collects and processes all mentions of @AddressEye.
 
 Depending on the `RUN_MODE` you choose, you may not need all of the keys specified.
 
