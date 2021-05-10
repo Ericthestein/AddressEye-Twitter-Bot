@@ -1,0 +1,8 @@
+fastapi==0.58.1
+uvicorn==0.11.5
+typing
+requests
+tweepy
+pydantic
+aiofiles
+requests_oauthlib
