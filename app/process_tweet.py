@@ -17,7 +17,7 @@ def process_tweet(bot, tweet):
         return
     message = text_parts[1]
     print("message: " + message)
-    if len(message) < 2:
+    if len(message) < 5:
         print("message too short")
         status = "@" + tweet.user.screen_name + " " + "I couldn't understand you; no address provided. " + BOT_HELP_MESSAGE
         bot.update_status(status=status, in_reply_to_status_id=tweet.id)
