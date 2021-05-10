@@ -11,6 +11,9 @@ IMAGES_DIR = "images/"
 MAPQUEST_API_KEY = os.getenv("MAPQUEST_KEY")
 MAPBOX_API_KEY = os.getenv("MAPBOX_KEY")
 
+ERR_LAT = 39.78373
+ERR_LONG = -100.445882
+
 # Use MapQuest to convert an address to a lat,long tuple
 def address_to_lat_long(address):
     try:
@@ -21,7 +24,13 @@ def address_to_lat_long(address):
         if status_code != 0:
             return None, None
         latlong = response_json["results"][0]["locations"][0]["latLng"]
-        return latlong["lat"], latlong["lng"]
+        lat = latlong["lat"]
+        lng = latlong["lng"]
+        print("Got latlong: " + str(lat) + ", " + str(lng))
+        if lat == ERR_LAT and lng == ERR_LONG:
+            print("Got error lat/long")
+            return None, None
+        return lat, lng
     except Exception as e:
         print(e)
         return None, None
