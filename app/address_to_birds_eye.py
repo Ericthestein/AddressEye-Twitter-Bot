@@ -17,6 +17,9 @@ def address_to_lat_long(address):
         params = {'key': MAPQUEST_API_KEY, 'location': address}
         response = requests.get(MAPQUEST_ENDPOINT, params=params)
         response_json = response.json()
+        status_code = response_json["info"]["statuscode"]
+        if status_code != 0:
+            return None, None
         latlong = response_json["results"][0]["locations"][0]["latLng"]
         return latlong["lat"], latlong["lng"]
     except Exception as e:
@@ -61,7 +64,7 @@ def address_to_birds_eye(address):
     lat, long = address_to_lat_long(address)
     if lat is None or long is None:
         print("Error: could not get latlong")
-        raise Exception("Failed to get latitude and longitude of the provided address")
+        raise Exception("Failed to get latitude and longitude of the provided address. Please try another address")
     image_path = lat_long_to_satellite_image(lat, long)
     if image_path is None:
         print("Error: could not get image")
