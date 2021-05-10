@@ -40,11 +40,15 @@ The `RUN_MODE`s available are:
     "address": "YOUR ADDRESS HERE"
 }
 ```
+Requires the following environment variables: `TWITTER_CONSUMER_KEY`, `TWITTER_CONSUMER_SECRET`, `TWITTER_ACCESS_TOKEN`, `TWITTER_ACCESS_TOKEN_SECRET`, `TWITTER_HANDLE`, `MAPQUEST_KEY`, `MAPBOX_KEY`, `RUN_MODE`. If you're only using the /address endpoint, none of the Twitter environment variables are required.
 
-3) REGISTER: Registers for and subscribes to Twitter's Account Activity API webhook.
-4) INTERVAL: At a set interval, collects and processes all mentions of @AddressEye.
+2) REGISTER: Registers for and subscribes to Twitter's Account Activity API webhook.
 
-Depending on the `RUN_MODE` you choose, you may not need all of the keys specified.
+Requires the following environment variables: `TWITTER_CONSUMER_KEY`, `TWITTER_CONSUMER_SECRET`, `TWITTER_ACCESS_TOKEN`, `TWITTER_ACCESS_TOKEN_SECRET`, `TWITTER_ENV_NAME`, `WEBHOOK_ENDPOINT`, `RUN_MODE`
+
+3) INTERVAL: At a set interval, collects and processes all mentions of @AddressEye.
+
+Requires the following environment variables: `TWITTER_CONSUMER_KEY`, `TWITTER_CONSUMER_SECRET`, `TWITTER_ACCESS_TOKEN`, `TWITTER_ACCESS_TOKEN_SECRET`, `TWITTER_HANDLE`, `MAPQUEST_KEY`, `MAPBOX_KEY`, `RUN_MODE`
 
 ## Challenges
 
