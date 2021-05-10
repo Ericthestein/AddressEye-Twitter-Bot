@@ -17,6 +17,11 @@ def process_tweet(bot, tweet):
         return
     message = text_parts[1]
     print("message: " + message)
+    if len(message) < 2:
+        print("message too short")
+        status = "@" + tweet.user.screen_name + " " + "I couldn't understand you; no address provided. " + BOT_HELP_MESSAGE
+        bot.update_status(status=status, in_reply_to_status_id=tweet.id)
+        return
     if message.lower() == "help":  # show help message
         print("Replying with help message")
         status = "@" + tweet.user.screen_name + " " + BOT_HELP_MESSAGE
